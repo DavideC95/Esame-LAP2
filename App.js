@@ -216,8 +216,6 @@ const RootStack = StackNavigator({
       screen: AddScreen
     }
 }, {
-  //Il secondo parametro di questa funzione può essere la schermata di default.
-  //mode: "modal", modifica l'animazione all'apertura di una nuova pagina.
   initialRouteName: "Home",
   navigationOptions: {
     headerTitleStyle: {
@@ -231,7 +229,6 @@ export default class App extends React.Component{
   render(){
     return (
       <RootStack/>
-      //<MainNav/>
       );
   }
 }
