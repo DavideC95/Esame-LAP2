@@ -1,4 +1,5 @@
 import React from 'react';
+import { MapView } from 'expo';
 import { StyleSheet, Text, View, Button, FlatList, Image, TouchableOpacity, AsyncStorage, TextInput} from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
@@ -92,18 +93,36 @@ class DetailScreen extends React.Component {
     title: "Detail"
   }
 
+  state = {
+    mapRegion: {
+      latitude: 37.49223,
+      longitude: 15.07041,
+    },
+  };
+
   render() {
     //Ricontrollare i parametri che passo.
     const {params} = this.props.navigation.state;
 
     return (
       <View style={styles.containerDetail}>
-        <Text style={{fontSize:24}}> {params.name} </Text>
+        <Text style={{fontSize:24, marginLeft: 125}}> {params.name} </Text>
         <Image source={{uri: params.img}} style={{width: 400, height: 200}} />       
-        <Text> Info: {params.info} </Text>
-        <Text> Tel: {params.tel} </Text>
-        <Text> Sito: {params.url} </Text>
-        <Text> Indirizzo: {params.address} </Text>
+        <Text style={{fontSize:16, marginTop:10}}> Info: {params.info} </Text>
+        <Text style={{fontSize:18, marginTop:10}}> Tel: {params.tel} </Text>
+        <Text style={{fontSize:18, marginTop:10, color:"blue"}}> Sito: {params.url} </Text>
+        <Text style={{fontSize:18, marginTop:10}}> Indirizzo: {params.address} </Text>
+        <View style={{marginTop:10}}>
+          <MapView
+            style={{ alignSelf: 'stretch', height: 200 }}
+            region={this.state.mapRegion}
+          >
+          <MapView.Marker
+            coordinate={this.state.mapRegion}
+            title={'Sei qui'}
+          />
+          </MapView>
+        </View>
       </View>
     );
   }
